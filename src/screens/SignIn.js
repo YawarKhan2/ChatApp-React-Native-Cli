@@ -10,9 +10,11 @@ import CustomSignInSignUp from "../components/customSignInSignUp";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 import { useNavigation } from "@react-navigation/native";
 import StartingAnimation from "../components/StartingAnimation";
-
+import { useState } from "react";
 
 const SignIn= ()=> {
+    const [Email, setEmail] = useState({ value: "", valid: true });
+    const [password, setPassword] = useState({ value: "", valid: true })
 
 
     const navigation  = useNavigation();
@@ -29,7 +31,18 @@ const SignIn= ()=> {
 
 
     const OnClickHandler =() =>{
-        console.log("Button clicked");
+        
+        setEmail(previousState=>({
+            ...previousState,
+            valid : Email.value.trim().length >=5 && Email.value.includes("@")
+         }))
+        
+        setPassword(previousState=>({
+            ...previousState,
+            valid : password.value.trim().length >=8
+         }))
+
+
     }
     return (
         <View style={{flex : 1 , backgroundColor : "#9b5ed8"}}> 
@@ -54,11 +67,20 @@ const SignIn= ()=> {
                    
                
 
-                <CustomInput icon={faRegularEnvelope} textConfigs={{placeholder : "Email"}}></CustomInput>
+                <CustomInput icon={faRegularEnvelope}
+                valid={Email.valid}
+                textConfigs={{placeholder : "Email" ,
+                    value : Email.value , onChangeText : (text)=>{setEmail({value : text , valid : true})}
+                }}></CustomInput>
 
                 
 
-                <CustomInput icon={faLock} textConfigs={{placeholder : "Password" , secureTextEntry : true}}></CustomInput>
+                <CustomInput icon={faLock}
+                valid={password.valid}
+                textConfigs={{placeholder : "Password" , secureTextEntry : true,
+                value : password.value , onChangeText : (text)=>{setPassword({value : text , valid : true})}
+
+                }}></CustomInput>
 
                 <View style={{
                     marginTop : responsiveHeight(2),
@@ -73,6 +95,7 @@ const SignIn= ()=> {
                     
                     ><Text style={{color:'#9b5ed8'}}>Forgot Password?</Text></TouchableOpacity>
                 </View>
+
                 <View style={{marginTop : responsiveHeight(3)}}>
 
                 <CustomButton text="Login" onCLick={OnClickHandler}></CustomButton>

@@ -1,4 +1,3 @@
-import LottieView from "lottie-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 import Card from "../components/card";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
@@ -19,9 +18,6 @@ const SignUp = () => {
     const [password, setPassword] = useState({ value: "", valid: true })
 
     const navigation = useNavigation();
-
-
-
 
 
     const OnTypeClick = () => {
@@ -54,7 +50,6 @@ const SignUp = () => {
             valid : Email.value.trim().length >=5 && Email.value.includes("@")
          }))
          
-
         
     }
 
