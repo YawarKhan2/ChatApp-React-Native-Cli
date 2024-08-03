@@ -128,3 +128,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+android/app/build/outputs/apk/debug/app-debug.apk
