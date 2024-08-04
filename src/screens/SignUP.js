@@ -9,52 +9,123 @@ import CustomSignInSignUp from "../components/customSignInSignUp";
 import { useNavigation } from "@react-navigation/native";
 import StartingAnimation from "../components/StartingAnimation";
 import { useState } from "react";
+import Toast from "react-native-toast-message";
+import axios from "axios";
+import consts from "../constants/const";
+import LottieView from "lottie-react-native";
 
 const SignUp = () => {
+
+    const { API_URL } = consts
 
     const [name, setName] = useState({ value: "", valid: true });
     const [Email, setEmail] = useState({ value: "", valid: true });
     const [username, setUsername] = useState({ value: "", valid: true })
     const [password, setPassword] = useState({ value: "", valid: true })
+    const [loader, setLoader] = useState(false);
 
     const navigation = useNavigation();
 
+    const IsLoading = () => {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <LottieView
+                    source={require('../animations/Loader.json')}
+                    autoPlay
+                    loop
+                    style={{
+                        height: responsiveHeight(16),
+                       
+                        width: responsiveHeight(16)
+                    }}
+                >
+                </LottieView>
+            </View>
+        )
+    }
+
+
+
 
     const OnTypeClick = () => {
+
+
+
+
+
         navigation.navigate("SignIn")
     }
 
 
-    const OnClickHandler = () => {
+    const OnClickHandler = async () => {
 
-         setName(previousState=>({
+        const nameValid = name.value.trim().length >= 3;
+        const emailValid = Email.value.trim().length >= 5 && Email.value.includes("@");
+        const usernameValid = username.value.trim().length >= 3;
+        const passwordValid = password.value.trim().length >= 8;
+
+        setName(previousState => ({
             ...previousState,
-            valid : name.value.trim().length >=3
-         }))
+            valid:nameValid
+        }))
 
 
-         setPassword(previousState=>({
+        setPassword(previousState => ({
             ...previousState,
-            valid : password.value.trim().length >=8
-         }))
+            valid: passwordValid
+        }))
 
 
-         setUsername(previousState=>({
+        setUsername(previousState => ({
             ...previousState,
-            valid : username.value.trim().length >=3
-         }))
+            valid: usernameValid
+        }))
 
 
-         setEmail(previousState=>({
+        setEmail(previousState => ({
             ...previousState,
-            valid : Email.value.trim().length >=5 && Email.value.includes("@")
-         }))
-         
-        
+            valid: emailValid
+        }))
+        console.log(name.valid)
+        if (nameValid && emailValid&& usernameValid && passwordValid) {
+            const API = API_URL + "/auth/register"
+            console.log(API)
+            try {
+                setLoader(true);
+                const response = await axios.post(API, {
+                    username: username.value,
+                    email: Email.value,
+                    password: password.value
+                })
+                setLoader(false);
+                Toast.show({
+                    type : "success",
+                    text1 : "Sucess!",
+                    text2 : "Your account have been created successfully!"
+                })
+            } catch (error) {
+               
+                setLoader(false)
+                Toast.show({
+                    type : "error",
+                    text1 : "Error!",
+                    text2 : error.response.data.message
+                })
+            } 
+
+
+        }
+
+    }
+
+    if (loader) {
+        return (<IsLoading></IsLoading>)
     }
 
     return (
-        <View style={{ flex: 1, backgroundColor: "#9b5ed8" }}>
+
+        < View style={{ flex: 1, backgroundColor: "#9b5ed8" }
+        }>
             <View style={{
                 width: "100%",
                 height: responsiveHeight(40),
@@ -80,27 +151,30 @@ const SignUp = () => {
                         {
                             placeholder: "Name Surname",
                             value: name.value,
-                            onChangeText : (text)=>{setName({valid : true , value : text})}
+                            onChangeText: (text) => { setName({ valid: true, value: text }) }
                         }
                     }></CustomInput>
 
                 <CustomInput
                     valid={Email.valid}
                     icon={faRegularEnvelope} textConfigs={{
-                        onChangeText : (text)=>{setEmail({valid : true , value : text})},
-                        placeholder: "Email", placeholderTextColor: "#BCBABE", value: Email.value }}></CustomInput>
+                        onChangeText: (text) => { setEmail({ valid: true, value: text }) },
+                        placeholder: "Email", placeholderTextColor: "#BCBABE", value: Email.value
+                    }}></CustomInput>
 
                 <CustomInput
                     valid={username.valid}
-                    icon={faAt} textConfigs={{ 
-                        onChangeText : (text)=>{setUsername({valid : true , value : text})},
-                        placeholder: "User Name", value: username.value }}></CustomInput>
+                    icon={faAt} textConfigs={{
+                        onChangeText: (text) => { setUsername({ valid: true, value: text }) },
+                        placeholder: "User Name", value: username.value
+                    }}></CustomInput>
 
                 <CustomInput
                     valid={password.valid}
-                    icon={faLock} textConfigs={{ 
-                        onChangeText : (text)=>{setPassword({valid : true , value : text})},
-                        placeholder: "Password", secureTextEntry: true, value: password.value }}></CustomInput>
+                    icon={faLock} textConfigs={{
+                        onChangeText: (text) => { setPassword({ valid: true, value: text }) },
+                        placeholder: "Password", secureTextEntry: true, value: password.value
+                    }}></CustomInput>
 
                 <View style={{ marginTop: responsiveHeight(3) }}>
 
@@ -112,7 +186,8 @@ const SignUp = () => {
                 <CustomSignInSignUp text="Already Have an Account?" type="Sign In" onClick={OnTypeClick}></CustomSignInSignUp>
 
             </Card>
-        </View>
+        </View >
+
     )
 }
 

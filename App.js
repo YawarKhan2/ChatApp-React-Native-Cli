@@ -12,6 +12,7 @@ import SignIn from './src/screens/SignIn';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ForgotPassScreen from './src/screens/ForgotPassScreen';
+import Toast from 'react-native-toast-message';
 
 const stack  = createStackNavigator();
 
@@ -36,6 +37,7 @@ const App  = () => {
         
     
     </SafeAreaView>
+      <Toast></Toast>
     </NavigationContainer>
   );
 }
