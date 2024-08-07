@@ -68,7 +68,7 @@ const SignUp = () => {
             ...previousState,
             valid:nameValid
         }))
-
+        
 
         setPassword(previousState => ({
             ...previousState,

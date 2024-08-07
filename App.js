@@ -13,6 +13,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ForgotPassScreen from './src/screens/ForgotPassScreen';
 import Toast from 'react-native-toast-message';
+import ChatScreen from './src/screens/ChatScreen';
 
 const stack  = createStackNavigator();
 
@@ -28,13 +29,14 @@ const App  = () => {
       
     <SafeAreaView style={{flex :1}} >
       <StatusBar hidden={true}></StatusBar>
-    <stack.Navigator initialRouteName='OnboardingScreen' screenOptions={{headerShown : false}}>
+    {/* <stack.Navigator initialRouteName='OnboardingScreen' screenOptions={{headerShown : false}}>
         <stack.Screen component={OnBoardingScreen} name='OnboardingScreen'></stack.Screen>
         <stack.Screen component={SignUp} name='SignUp'></stack.Screen>
         <stack.Screen component={SignIn} name='SignIn'></stack.Screen>
         <stack.Screen component={ForgotPassScreen} name="ForgetPass"></stack.Screen>
-         </stack.Navigator>
-        
+         </stack.Navigator> */}
+
+        <ChatScreen></ChatScreen>        
     
     </SafeAreaView>
       <Toast></Toast>
