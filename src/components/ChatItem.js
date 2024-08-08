@@ -1,6 +1,7 @@
 import { ImageBackground, Text, View } from "react-native"
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 import colors from "../constants/colors";
+import UserPic from "./UserPic";
 
 const ChatItem = () => {
     return (
@@ -13,28 +14,8 @@ const ChatItem = () => {
             borderBottomWidth: responsiveWidth(0.3)
         }}>
 
-            <View style={{
-                height: "100%", width: "20%",
-                alignItems: "center",
-                justifyContent: "center"
-            }}>
-
-                <View style={{
-                    
-                    borderRadius: responsiveHeight(10),
-                    height: "70%",
-                    width: "70%",
-                    overflow: "hidden"
-                }}>
-                    <ImageBackground
-                        source={require('../assets/images/person.webp')}
-                        style={{ height: "100%", width: "100%" }}
-                    >
-
-                    </ImageBackground>
-                </View>
-
-            </View>
+            
+           <UserPic></UserPic>
 
             <View style={{
                 height: "100%", width: "60%",
@@ -46,8 +27,8 @@ const ChatItem = () => {
                 <View>
 
                 </View>
-                <Text style={{ color: "black", fontWeight: "bold", fontSize: responsiveFontSize(1.5) }}> Yawar Khan</Text>
-                <Text style={{ fontSize: responsiveFontSize(1.5), color: "black" }}>Hi What's your  plan today?</Text>
+                <Text style={{ color: "black", fontWeight: "bold", fontSize: responsiveFontSize(1.8) }}> Yawar Khan</Text>
+                <Text style={{ fontSize: responsiveFontSize(1.7), color: "black" }}>Hi What's your  plan today?</Text>
 
             </View>
 
@@ -57,7 +38,7 @@ const ChatItem = () => {
                 alignItems: "center",
                 justifyContent: "center"
             }}>
-                <Text>02:02 am</Text>
+                <Text style={{color:"grey"}}>02:02 am</Text>
 
                 <View
                     style={{
@@ -72,7 +53,7 @@ const ChatItem = () => {
                 >
 
                     <Text style={{color: "white" , 
-                        fontSize : responsiveFontSize(1.2) , 
+                        fontSize : responsiveFontSize(1.5) , 
                         fontWeight : "bold"}}
 
                         >3</Text>

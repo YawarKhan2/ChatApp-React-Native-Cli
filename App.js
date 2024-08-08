@@ -14,6 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ForgotPassScreen from './src/screens/ForgotPassScreen';
 import Toast from 'react-native-toast-message';
 import ChatScreen from './src/screens/ChatScreen';
+import Chat from './src/screens/Chat';
 
 const stack  = createStackNavigator();
 
@@ -34,9 +35,10 @@ const App  = () => {
         <stack.Screen component={SignUp} name='SignUp'></stack.Screen>
         <stack.Screen component={SignIn} name='SignIn'></stack.Screen>
         <stack.Screen component={ForgotPassScreen} name="ForgetPass"></stack.Screen>
+        <stack.Screen component={ChatScreen} name="ChatScreen"></stack.Screen>
          </stack.Navigator> */}
 
-        <ChatScreen></ChatScreen>        
+       <Chat></Chat>
     
     </SafeAreaView>
       <Toast></Toast>

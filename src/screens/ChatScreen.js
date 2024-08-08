@@ -12,7 +12,7 @@ const ChatScreen = () => {
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1  ,backgroundColor : "white"}}>
             {/* //Top Component */}
             <View style={{
                 justifyContent: "space-between",
@@ -24,7 +24,7 @@ const ChatScreen = () => {
             }}>
 
                 <Text style={{
-                    fontSize: responsiveFontSize(2),
+                    fontSize: responsiveFontSize(3),
                     fontWeight: "bold",
                     color: "black",
                     marginLeft : responsiveWidth(3)
@@ -101,6 +101,7 @@ const ChatScreen = () => {
             data={[1,2,3,4,5,6,7]}
             renderItem={ChatItemFun}
             keyExtractor={(item)=>item.toString()}
+            
             >
 
             </FlatList>

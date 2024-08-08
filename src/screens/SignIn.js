@@ -41,6 +41,9 @@ const SignIn= ()=> {
             ...previousState,
             valid : password.value.trim().length >=8
          }))
+         
+
+         navigation.navigate("ChatScreen");
 
 
     }

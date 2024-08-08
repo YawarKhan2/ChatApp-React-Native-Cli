@@ -6,11 +6,13 @@ import OnBoardingItems from '../components/onboardingitems';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
+import _const from '../constants/const';
 
 const OnBoardingScreen = () => {
     const navigation = useNavigation();
     const [currentIndex, setCurrentIndex] = useState(0);
     const flatListRef = useRef(null);
+    const {onboardingData} = _const;
 
     // Precompute values
     const expandedWidth = responsiveWidth(40);
@@ -47,12 +49,12 @@ const OnBoardingScreen = () => {
             <View style={{ height: responsiveHeight(80), width: '100%' }}>
                 <FlatList
                     ref={flatListRef}
-                    data={[1, 2, 3]}
+                    data={onboardingData}
                     renderItem={render}
                     horizontal
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
-                    keyExtractor={(item) =>  item.toString()}
+                    keyExtractor={(item) =>  item.id.toString()}
                     onScroll={(e) => onViewChanged(e)}
                 />
             </View>
@@ -115,6 +117,7 @@ const OnBoardingScreen = () => {
                             )}
                         </Animated.View>
                     </TouchableOpacity>
+
                 </View>
             </View>
         </View>

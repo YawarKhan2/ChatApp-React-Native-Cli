@@ -18,7 +18,7 @@ const OnBoardingItems =({item}) =>{
                         alignItems : "center",
                         justifyContent : "center",
                         }}>
-                    <Image source={image} style={{
+                    <Image source={item.image} style={{
                     height :"85%",
                     width : "85%",
                     marginTop: responsiveHeight(8)

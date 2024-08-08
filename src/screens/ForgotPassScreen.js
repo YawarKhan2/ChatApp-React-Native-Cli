@@ -58,12 +58,13 @@ const ForgotPassScreen =() => {
             marginTop :responsiveHeight(1),
             alignItems : "center",
             justifyContent : "center",
+            backgroundColor : "white",
             elevation : 2,
 
            }}
             >
 
-                <Text style={{fontSize : responsiveFontSize(1.6)}}>Back</Text>
+                <Text style={{fontSize : responsiveFontSize(1.6) , color : "black"}}>Back</Text>
             </TouchableOpacity>
             
         </Card>
